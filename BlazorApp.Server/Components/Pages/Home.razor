@@ -1,0 +1,56 @@
+﻿@page "/"
+
+@* @rendermode @(new InteractiveServerRenderMode(false)) *@
+
+@rendermode RenderMode.InteractiveServer
+<PageTitle>Home</PageTitle>
+
+<h1>Test de renderMode</h1>
+
+<BlazorApp.Shared.LifeCycle />
+
+
+@* <ul>
+	@foreach (var step in _steps)
+	{
+		<li>@step</li>
+	}
+</ul>
+
+<p>
+	@_apiResponse
+</p> *@
+
+<p>
+	Infos de route 1 : @Data
+
+</p>
+<p>
+	Subcomponent2 : @Data2
+</p>
+
+<p>
+	Subcomponent3 : @Data3
+</p>
+
+
+
+@code {
+	[SupplyParameterFromQuery]
+	public string Data { get; set; }//mettre ça dans l'url ?Data3=valeur3
+
+	[Parameter]
+	public string Data2 { get; set; }
+
+	
+	[Parameter]
+	public string Data3 { get; set; } 
+
+
+	// protected override void OnInitialized()
+	// {
+	// 	base.OnInitialized();
+	// }
+
+
+}

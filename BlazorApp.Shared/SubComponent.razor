@@ -1,0 +1,20 @@
+﻿<p>
+	Subcomponent : @Data
+</p>
+
+
+
+@code {
+	[Parameter, EditorRequired] // Indique que ce paramètre est obligatoire
+	public string Data { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+	}
+
+	protected override void OnParametersSet()
+	{
+		base.OnParametersSet();
+	}
+}
