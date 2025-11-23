@@ -1,7 +1,13 @@
 ﻿@page "/"
 
+<style>
+	.active {
+		color: red;
+	}
+</style>
+
 @* @rendermode @(new InteractiveServerRenderMode(false)) *@
-@inject NavigationManager Navigation
+@* @inject NavigationManager Navigation *@
 
 @rendermode RenderMode.InteractiveServer
 <PageTitle>Home</PageTitle>
@@ -10,10 +16,21 @@
 
 <BlazorApp.Shared.LifeCycle />
 
-<button @onclick="@(() => Navigation.NavigateTo("/2"))">
-	Aller à la page 2
-</button>
 
+@*mettre @inject NavigationManager Navigation en haut de la page pour accéder à une autre page
+	avec un bouton
+*@
+@* <button @onclick="@(() => Navigation.NavigateTo("/2"))"> 
+	Aller à la page 2
+</button> *@
+
+@* <a href="2">Aller sur la page 2</a> *@
+<NavLink ActiveClass="current"AdditionalAttributes="@(new Dictionary<string, object>
+{
+	["data-active"] = true,
+		["href"] = "/"
+})" Match="NavLinkMatch.Prefix">Se rendre sur l'accueil</NavLink>
+<NavLink href="2">Se rendre sur la page 2</NavLink>
 
 @* <ul>
 	@foreach (var step in _steps)

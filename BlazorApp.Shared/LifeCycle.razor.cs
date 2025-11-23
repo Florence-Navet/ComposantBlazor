@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using BlazorApp.Shared.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorApp.Shared;
@@ -23,8 +24,9 @@ public partial class LifeCycle : IAsyncDisposable
    
 
 //[inject] private IConsole Console { get; set; } = default!;
+[Inject] private IApiService ApiService { get; set; } = default!;
 
-private string? _apiResponse;
+    private string? _apiResponse;
     private List<string> _steps = new List<string>();
     private string? _var = "pas cliqué";
 
@@ -102,8 +104,9 @@ private string? _apiResponse;
 
         if(firstRender)
         {
-                await Task.Delay(5000);// si l'api est un peu longue à répondre
-            _apiResponse = "Response blabla de l'API";
+            //await Task.Delay(5000);// si l'api est un peu longue à répondre
+            //_apiResponse = "Response blabla de l'API";
+            _apiResponse = await ApiService.GetDataFromApi();
             //appel de StateHasChanged pour forcer le re-rendering du composant
             //peut aussi etre appelé dans OnInitialized pour un rendu initial mais résultat similaire
             StateHasChanged(); // mise à jour de l'UI après la modification de _apiResponse 

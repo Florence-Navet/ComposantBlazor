@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BlazorApp.Hybrid.Services;
+using BlazorApp.Shared.Services;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorApp.Hybrid
 {
@@ -15,9 +17,10 @@ namespace BlazorApp.Hybrid
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<IApiService, HybridApiService>();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 

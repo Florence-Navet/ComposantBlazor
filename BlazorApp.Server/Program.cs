@@ -1,10 +1,14 @@
 using BlazorApp.Server.Components;
+using BlazorApp.Server.Services;
+using BlazorApp.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<IApiService, ServerApiService>();
 
 var app = builder.Build();
 
