@@ -12,11 +12,19 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorApp.Shared;
 
-public partial class LifeCycle
-{
-    //[inject] private IConsole Console { get; set; } = default!;
 
-    private string? _apiResponse;
+/*
+ * public partial class LifeCycle : IDisposable - en version synchrone
+ * public partial class LifeCycle : IAsyncDisposable - en version asynchrone
+ * 
+ */
+public partial class LifeCycle : IAsyncDisposable
+{
+   
+
+//[inject] private IConsole Console { get; set; } = default!;
+
+private string? _apiResponse;
     private List<string> _steps = new List<string>();
     private string? _var = "pas cliqué";
 
@@ -116,6 +124,17 @@ public partial class LifeCycle
         var result = base.ShouldRender();
         Console.WriteLine("ShouldRender - FIN");
         return result;
+    }
+
+    public void Dispose()
+    {
+        System.Console.WriteLine("LifeCyle - Dispose");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        System.Console.WriteLine("LifeCyle - Dispose async");
+        await Task.Delay(5000);
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿@page "/"
 
 @* @rendermode @(new InteractiveServerRenderMode(false)) *@
+@inject NavigationManager Navigation
 
 @rendermode RenderMode.InteractiveServer
 <PageTitle>Home</PageTitle>
@@ -8,6 +9,10 @@
 <h1>Test de renderMode</h1>
 
 <BlazorApp.Shared.LifeCycle />
+
+<button @onclick="@(() => Navigation.NavigateTo("/2"))">
+	Aller à la page 2
+</button>
 
 
 @* <ul>
