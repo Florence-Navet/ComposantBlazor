@@ -1,8 +1,28 @@
 ﻿@page "/2"
 
+@inject NavigationManager Navigation
+@rendermode RenderMode.InteractiveServer
+
+@inject IApiService Service
+
 <h3>Pages 2</h3>
+
+<a href="/">Aller sur d'accueil</a> 
+
+<h4>Nouveau test Au secours !!!</h4>
 <p>coucou c'est un  test page 2 </p>
 
+
+<p>
+	@Service.GetDataFromApi()
+
+</p>
+
 @code {
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+	}
 
 }

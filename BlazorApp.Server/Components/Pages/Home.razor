@@ -7,9 +7,12 @@
 </style>
 
 @* @rendermode @(new InteractiveServerRenderMode(false)) *@
-@* @inject NavigationManager Navigation *@
-
+@inject NavigationManager Navigation
 @rendermode RenderMode.InteractiveServer
+
+@inject IApiService Service
+
+
 <PageTitle>Home</PageTitle>
 
 <h1>Test de renderMode</h1>
@@ -31,6 +34,9 @@
 		["href"] = "/"
 })" Match="NavLinkMatch.Prefix">Se rendre sur l'accueil</NavLink>
 <NavLink href="2">Se rendre sur la page 2</NavLink>
+
+
+
 
 @* <ul>
 	@foreach (var step in _steps)
@@ -55,6 +61,10 @@
 	Subcomponent3 : @Data3
 </p>
 
+<p>
+	@Service.GetDataFromApi()
+
+</p>
 
 
 @code {

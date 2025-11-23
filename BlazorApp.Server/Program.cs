@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<IApiService, ServerApiService>();
+//builder.Services.AddSingleton<IApiService, ServerApiService>();
+builder.Services.AddTransient<IApiService, ServerApiService>();
+//builder.Services.AddScoped<IApiService, ServerApiService>();
 
 var app = builder.Build();
 
