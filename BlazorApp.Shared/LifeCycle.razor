@@ -1,9 +1,11 @@
-﻿<ul>
+﻿@* <ul>
 	@foreach (var step in _steps)
 	{
 		<li>@step</li>
 	}
-</ul>
+</ul> *@
+
+<ElementsList Items=" _steps" />
 
 <p>
 	@_apiResponse

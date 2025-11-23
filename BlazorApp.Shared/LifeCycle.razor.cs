@@ -20,7 +20,9 @@ public partial class LifeCycle
     private List<string> _steps = new List<string>();
     private string? _var = "pas cliqué";
 
-
+    /// <summary>
+    /// permet d'initialiser le composant de manière synchrone
+    /// </summary>
     protected override void OnInitialized()
     {
         _steps.Add(nameof(OnInitialized));
@@ -29,6 +31,11 @@ public partial class LifeCycle
         Console.WriteLine("OnInitialed - FIN");
     }
 
+
+    /// <summary>
+    /// permet d'initialiser le composant de manière asynchrone
+    /// </summary>
+    /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
         _steps.Add(nameof(OnInitializedAsync));
@@ -36,11 +43,15 @@ public partial class LifeCycle
         await base.OnInitializedAsync();
 
         //await Task.Delay(15000);
-        _apiResponse = "Response blabla de l'API";
+        //_apiResponse = "Response blabla de l'API";
 
         Console.WriteLine("OnInitializedAsync - FIN");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     protected override async Task OnParametersSetAsync()
     {
         _steps.Add(nameof(OnParametersSetAsync));
@@ -49,6 +60,11 @@ public partial class LifeCycle
         Console.WriteLine("OnParametersSetAsync - FIN");
     }
 
+    /// <summary>
+    /// encadre l'appel des paramètres passés au composant (le chef d'orchestre)
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         _steps.Add(nameof(SetParametersAsync));
@@ -65,14 +81,34 @@ public partial class LifeCycle
         base.OnAfterRender(firstRender);
         Console.WriteLine($"OnAfterRender - FIN (First ? {firstRender}");
     }
+
+    /// <summary>
+    /// méthode appelée après chaque rendu du composant 
+    /// </summary>
+    /// <param name="firstRender"></param>
+    /// <returns></returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         _steps.Add(nameof(OnAfterRenderAsync));
         Console.WriteLine($"OnAfterRenderAsync - DEBUT (First ? {firstRender})");
+
+        if(firstRender)
+        {
+                await Task.Delay(5000);// si l'api est un peu longue à répondre
+            _apiResponse = "Response blabla de l'API";
+            //appel de StateHasChanged pour forcer le re-rendering du composant
+            //peut aussi etre appelé dans OnInitialized pour un rendu initial mais résultat similaire
+            StateHasChanged(); // mise à jour de l'UI après la modification de _apiResponse 
+
+        }
         await base.OnAfterRenderAsync(firstRender);
         Console.WriteLine($"OnAfterRenderAsync - DEBUT (First ? {firstRender})");
     }
 
+    /// <summary>
+    /// permet de savoir si le composant doit être raffraichi ou pas
+    /// </summary>
+    /// <returns></returns>
     protected override bool ShouldRender()
     {
         _steps.Add(nameof(ShouldRender));
