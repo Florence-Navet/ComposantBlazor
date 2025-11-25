@@ -1,3 +1,4 @@
+using BlazorApp.Shared.Abstractions;
 using BlazorApp.Shared.Services;
 using BlazorApp.WASM;
 using BlazorApp.WASM.Services;
@@ -10,6 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+builder.Services.AddSingleton<IConsole, JcConsole>();
 builder.Services.AddSingleton<IApiService, WASMApiService>();
 
 await builder.Build().RunAsync();
