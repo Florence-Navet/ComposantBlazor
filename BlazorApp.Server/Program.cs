@@ -1,5 +1,6 @@
 using BlazorApp.Server.Components;
 using BlazorApp.Server.Services;
+using BlazorApp.Shared.Abstractions;
 using BlazorApp.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 //builder.Services.AddSingleton<IApiService, ServerApiService>();
+builder.Services.AddScoped<IConsole, JConsole>();
 builder.Services.AddTransient<IApiService, ServerApiService>();
 //builder.Services.AddScoped<IApiService, ServerApiService>();
+
+
 
 var app = builder.Build();
 

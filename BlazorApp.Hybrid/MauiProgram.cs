@@ -1,4 +1,5 @@
 ﻿using BlazorApp.Hybrid.Services;
+using BlazorApp.Shared.Abstractions;
 using BlazorApp.Shared.Services;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,7 @@ namespace BlazorApp.Hybrid
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<IApiService, HybridApiService>();
+            builder.Services.AddSingleton<IConsole, JConsole>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();

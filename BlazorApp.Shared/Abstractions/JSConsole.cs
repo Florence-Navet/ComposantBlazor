@@ -8,7 +8,7 @@ namespace BlazorApp.Shared.Abstractions;
 
    
     
-        public class JcConsole : IConsole
+        public class JConsole : IConsole
         {
             public void Log(string message)
             {
