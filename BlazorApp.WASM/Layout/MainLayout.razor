@@ -1,3 +1,28 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+<p>
+    Page courante : @_page
+</p>
 
 @Body
+
+@code {
+    private string? _page = "Index";
+    override protected void OnInitialized()
+    {
+        Navigation.LocationChanged += (s, e) =>
+        {
+            _page = Navigation.ToBaseRelativePath(e.Location);
+            StateHasChanged();
+        };
+        Navigation.RegisterLocationChangingHandler(LocationChanged);
+        base.OnInitialized();
+    }
+    public async ValueTask LocationChanged(LocationChangingContext context)
+    {
+        _page = context.TargetLocation;
+        
+    }
+}
+

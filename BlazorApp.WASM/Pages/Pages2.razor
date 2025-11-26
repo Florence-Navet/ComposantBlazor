@@ -14,8 +14,17 @@
 	Contexte de navigation : @context
 </p>
 
-@code {
-	private string? context;
+<button @onclick ="() => count++">Compteur : @count</button>
+
+<NavigationLock ConfirmExternalNavigation="@(count > 0)" 
+	OnBeforeInternalNavigation="OnBeforeInternalNavigation">
+
+
+	</NavigationLock>
+
+	@code {
+		private string? context;
+	private int count;
 
 	protected override void OnInitialized()
 	{
@@ -24,5 +33,12 @@
 		// var str = Navigation.ToAbsoluteUri(Navigation.Uri);
 		base.OnInitialized();
 	}
+	private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+	{ 
+		if(count > 0)
+		{
+			context.PreventNavigation();
+		}
 
+	}
 }
