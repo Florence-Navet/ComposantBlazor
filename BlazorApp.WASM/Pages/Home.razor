@@ -1,5 +1,95 @@
 ﻿@page "/"
+@using BlazorApp.Shared.Services
+
+
+
+<style>
+	.active {
+		color: red;
+	}
+</style>	
+
+
+@inject NavigationManager Navigation
 
 <PageTitle>Home</PageTitle>
 
-<BlazorApp.Shared.LifeCycle />
+
+<button @onclick="@(() => Navigation.NavigateTo("/2",new NavigationOptions {
+HistoryEntryState = "contexte de la page 1"
+}))"> 
+	Aller à la page 2
+</button> 
+
+
+
+
+
+@* <h1>Test de renderMode</h1>
+
+<BlazorApp.Shared.LifeCycle /> *@
+
+
+@*mettre @inject NavigationManager Navigation en haut de la page pour accéder à une autre page
+	avec un bouton
+*@
+
+@* <a href="2">Aller sur la page 2</a> *@
+<NavLink ActiveClass="current" AdditionalAttributes="@(new Dictionary<string, object>
+							   {
+								   ["data-active"] = true,
+								   ["href"] = "/home"
+							   })" Match="NavLinkMatch.Prefix">Se rendre sur l'accueil</NavLink>
+<NavLink href="2">Se rendre sur la page 2</NavLink>
+
+
+
+
+@* <ul>
+	@foreach (var step in _steps)
+	{
+		<li>@step</li>
+	}
+</ul>
+
+<p>
+	@_apiResponse
+</p> *@
+
+<p>
+	Infos de route 1 : @Data
+
+</p>
+<p>
+	Subcomponent2 : @Data2
+</p>
+
+<p>
+	Subcomponent3 : @Data3
+</p>
+
+@* <p>
+	@Service.GetDataFromApi()
+
+</p> *@
+
+
+@code {
+	[SupplyParameterFromQuery]
+	public string Data { get; set; }//mettre ça dans l'url ?Data3=valeur3
+
+	[Parameter]
+	public string Data2 { get; set; }
+
+
+	[Parameter]
+	public string Data3 { get; set; }
+
+
+	// protected override void OnInitialized()
+	// {
+	// 	base.OnInitialized();
+	// }
+
+
+}
