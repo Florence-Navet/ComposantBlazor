@@ -2,6 +2,7 @@
 
 @inject NavigationManager Navigation
 
+<<<<<<< HEAD
 
 <h3>Pages 2</h3>
 
@@ -16,11 +17,52 @@
 
 @code {
 	private string? context;
+=======
+<h3>Pages 2</h3>
+
+<a href="/">Aller sur d'accueil 1</a>
+
+<h4>Nouveau test Au secours !!!</h4>
+<p>coucou c'est un pour le context</p>
+
+
+<p>
+	Contexte de navigation : @context
+</p>
+
+<button @onclick ="() => count++">Compteur : @count</button>
+
+<NavigationLock ConfirmExternalNavigation="@(count > 0)" 
+	OnBeforeInternalNavigation="OnBeforeInternalNavigation">
+
+
+	</NavigationLock>
+
+	@code {
+		private string? context;
+	private int count;
+>>>>>>> 89eaa3345f14fc04bf0818147e2d8afbe70dfc5e
 
 	protected override void OnInitialized()
 	{
 		context = Navigation.HistoryEntryState;
+<<<<<<< HEAD
 		base.OnInitialized();
 	}
 
 }
+=======
+		// var str = Navigation.ToBaseRelativePath(Navigation.Uri);
+		// var str = Navigation.ToAbsoluteUri(Navigation.Uri);
+		base.OnInitialized();
+	}
+	private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+	{ 
+		if(count > 0)
+		{
+			context.PreventNavigation();
+		}
+
+	}
+}
+>>>>>>> 89eaa3345f14fc04bf0818147e2d8afbe70dfc5e
