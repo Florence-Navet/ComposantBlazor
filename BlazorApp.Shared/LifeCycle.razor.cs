@@ -38,8 +38,9 @@ public partial class LifeCycle : IAsyncDisposable
     /// permet d'initialiser le composant de mani?re synchrone
     /// </summary>
     protected override void OnInitialized()
-    {
 
+    {
+        //methode qui marche mais peu poser pb dans le futur avec les mises jours blazor
         //_platform = Navigation.GetType().AssemblyQualifiedName switch
         //{
         //    string s when s.Contains("Server", StringComparison.OrdinalIgnoreCase) => "Blazor Web App Server",
@@ -53,7 +54,8 @@ public partial class LifeCycle : IAsyncDisposable
             _platform = "Blazor WebAssembly";
         }
         else
-        {
+
+        {/*risque de ne pas marcher sur server car mets hybrid*/
             var isHybrid = RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS")) ||
                            RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID")) ||
                            RuntimeInformation.IsOSPlatform(OSPlatform.Create("WINDOWS"));

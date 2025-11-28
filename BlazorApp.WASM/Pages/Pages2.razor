@@ -1,68 +1,36 @@
 ﻿@page "/2"
-
 @inject NavigationManager Navigation
 
-<<<<<<< HEAD
+<h3>Page 2</h3>
 
-<h3>Pages 2</h3>
-
-<a href="/">Aller sur la page 1 WASM</a> 
-
-<p>
-	Contexte de navigation : @context
-
-</p>
-
-
-
-@code {
-	private string? context;
-=======
-<h3>Pages 2</h3>
-
-<a href="/">Aller sur d'accueil 1</a>
+<a href="/">Aller sur la page d'accueil</a>
 
 <h4>Nouveau test Au secours !!!</h4>
 <p>coucou c'est un pour le context</p>
 
+<p>Contexte de navigation : @context</p>
 
-<p>
-	Contexte de navigation : @context
-</p>
+<button @onclick="() => count++">Compteur : @count</button>
 
-<button @onclick ="() => count++">Compteur : @count</button>
+<NavigationLock ConfirmExternalNavigation="@(count > 0)"
+                OnBeforeInternalNavigation="OnBeforeInternalNavigation">
+</NavigationLock>
 
-<NavigationLock ConfirmExternalNavigation="@(count > 0)" 
-	OnBeforeInternalNavigation="OnBeforeInternalNavigation">
+@code {
+    private string? context;
+    private int count;
 
+    protected override void OnInitialized()
+    {
+        context = Navigation.HistoryEntryState;
+        base.OnInitialized();
+    }
 
-	</NavigationLock>
-
-	@code {
-		private string? context;
-	private int count;
->>>>>>> 89eaa3345f14fc04bf0818147e2d8afbe70dfc5e
-
-	protected override void OnInitialized()
-	{
-		context = Navigation.HistoryEntryState;
-<<<<<<< HEAD
-		base.OnInitialized();
-	}
-
+    private async Task OnBeforeInternalNavigation(LocationChangingContext context)
+    {
+        if (count > 0)
+        {
+            context.PreventNavigation();
+        }
+    }
 }
-=======
-		// var str = Navigation.ToBaseRelativePath(Navigation.Uri);
-		// var str = Navigation.ToAbsoluteUri(Navigation.Uri);
-		base.OnInitialized();
-	}
-	private async Task OnBeforeInternalNavigation(LocationChangingContext context)
-	{ 
-		if(count > 0)
-		{
-			context.PreventNavigation();
-		}
-
-	}
-}
->>>>>>> 89eaa3345f14fc04bf0818147e2d8afbe70dfc5e
