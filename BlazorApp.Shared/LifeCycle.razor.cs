@@ -8,8 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using BlazorApp.Shared.Abstractions;
 using BlazorApp.Shared.Services;
 using Microsoft.AspNetCore.Components;
+using System.Runtime.InteropServices;
 
 namespace BlazorApp.Shared;
 
@@ -25,16 +27,38 @@ public partial class LifeCycle : IAsyncDisposable
 
     //[inject] private IConsole Console { get; set; } = default!;
     [Inject] private IApiService ApiService { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!; 
 
     private string? _apiResponse;
     private List<string> _steps = new List<string>();
-    private string? _var = "pas cliqu?";
+    private string? _var = "pas cliqué";
+    private string? _platform = "Blazor Web App Server";
 
     /// <summary>
     /// permet d'initialiser le composant de mani?re synchrone
     /// </summary>
     protected override void OnInitialized()
     {
+
+        //_platform = Navigation.GetType().AssemblyQualifiedName switch
+        //{
+        //    string s when s.Contains("Server", StringComparison.OrdinalIgnoreCase) => "Blazor Web App Server",
+        //    string s when s.Contains("WebAssembly", StringComparison.OrdinalIgnoreCase) => "Blazor WebAssembly",
+        //    _ => "Hybrid"
+        //};
+
+        var isWasm = RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"));
+        if (isWasm)
+        {
+            _platform = "Blazor WebAssembly";
+        }
+        else
+        {
+            var isHybrid = RuntimeInformation.IsOSPlatform(OSPlatform.Create("IOS")) ||
+                           RuntimeInformation.IsOSPlatform(OSPlatform.Create("ANDROID")) ||
+                           RuntimeInformation.IsOSPlatform(OSPlatform.Create("WINDOWS"));
+            _platform = "Blazor Hybrid";
+        }
         _steps.Add(nameof(OnInitialized));
         Console.WriteLine("OnInitialed - DEBUT");
         base.OnInitialized();

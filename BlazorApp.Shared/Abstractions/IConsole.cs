@@ -8,5 +8,8 @@ namespace BlazorApp.Shared.Abstractions
 {
     public interface IConsole
     {
+        public void Log(string message);
     }
+
 }
+

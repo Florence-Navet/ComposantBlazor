@@ -1,5 +1,31 @@
 ﻿@page "/"
 
+@using BlazorApp.Shared.Services;
+@inject NavigationManager Navigation
+
 <PageTitle>Home</PageTitle>
 
-<BlazorApp.Shared.LifeCycle />
+<BlazorApp.Shared.LifeCycle /> 
+
+
+<style>
+	.active {
+		color: red;
+	}
+</style>
+
+
+
+
+
+
+<button @onclick="@(() => Navigation.NavigateTo("/2", new NavigationOptions {
+	HistoryEntryState = "contexte de la page 1"
+}))">
+		Aller à la page 2
+</button>
+
+
+
+
+
