@@ -20,7 +20,8 @@ namespace BlazorApp.Hybrid
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<IApiService, HybridApiService>();
             builder.Services.AddSingleton<IConsole, JConsole>();
-
+            builder.Services.AddScoped<IDogService, HybridDogService>();
+            builder.Services.AddScoped(_sp => new HttpClient());
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();

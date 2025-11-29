@@ -13,7 +13,15 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<IConsole, JConsole>();
 builder.Services.AddTransient<IApiService, ServerApiService>();
 //builder.Services.AddScoped<IApiService, ServerApiService>();
+builder.Services.AddScoped<IDogService, ServerDogsService>();
+//builder.Services.AddHttpClient(); // premiere methode sans parametrage
 
+
+/*ci dessou avec "dogs" client nommé */
+builder.Services.AddHttpClient("dogs", client =>
+{
+    client.BaseAddress = new Uri("https://dog.ceo");
+});
 
 
 var app = builder.Build();
