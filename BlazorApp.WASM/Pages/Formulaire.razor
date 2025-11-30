@@ -16,6 +16,8 @@
 
 </form> *@
 
+
+
 @* dataAnnotationvalidator -> pour la validation des données
 Model -> pour lier le formulaire a un model 
 validatationSumaty recupere les erreurs depuis le Editcontex
@@ -25,7 +27,8 @@ ValidationMessage For -> pour afficher les erreurs d'un champ spécifique
 *@
 
 <EditForm FormName="personne_infos" OnValidSubmit="OnSubmit" Model="Model">
-	<DataAnnotationsValidator /> 
+	<Blazored.FluentValidation.FluentValidationValidator DisableAssemblyScanning ="true"/>
+	@* <DataAnnotationsValidator />  *@
 	@* <ValidationSummary /> *@
 	@* <input type="text" placeholder="Nom" @bind-value="Model.Nom" /> *@
 	<InputText @bind-Value="Model.Nom" placeholder="Nom" />
