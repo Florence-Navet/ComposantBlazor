@@ -1,0 +1,43 @@
+﻿@page "/formulaire"
+
+<h3>Formulaire</h3>
+
+@* @if(_error) pour la getion des erreurs simple a utiiser avec form 
+{
+	<p>
+		Une erreur est survenue dans votre saisie
+	</p>
+} *@
+
+@* <form method="post" @formname="personne_infos" @onsubmit="OnSubmit">
+
+	<input type="text" placeholder="Nom" @bind-value="Model.Nom"/>
+	<button type="submit">Envoyer</button>
+
+</form> *@
+
+@* dataAnnotationvalidator -> pour la validation des données
+Model -> pour lier le formulaire a un model 
+validatationSumaty recupere les erreurs depuis le Editcontex
+ou
+ValidationMessage For -> pour afficher les erreurs d'un champ spécifique
+
+*@
+
+<EditForm FormName="personne_infos" OnValidSubmit="OnSubmit" Model="Model">
+	<DataAnnotationsValidator /> 
+	@* <ValidationSummary /> *@
+	@* <input type="text" placeholder="Nom" @bind-value="Model.Nom" /> *@
+	<InputText @bind-Value="Model.Nom" placeholder="Nom" />
+	<ValidationMessage For="() => Model.Nom"/>
+	<button type="submit">Envoyer</button>
+
+</EditForm>
+
+
+@if(!string.IsNullOrEmpty(_nomPersonne))
+{
+	<h2>Le nom est @_nomPersonne</h2>
+}
+
+

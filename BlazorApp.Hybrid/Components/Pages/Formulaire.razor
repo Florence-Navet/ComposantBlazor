@@ -1,0 +1,18 @@
+﻿@page "/formulaire"
+
+<h3>Formulaire</h3>
+
+<form method="post" @formname="personne_infos" @onsubmit="OnSubmit">
+
+	<input type="text" placeholder="Nom" @bind-value="Model.Nom"/>
+	<button type="submit">Envoyer</button>
+
+</form>
+
+
+@if(!string.IsNullOrEmpty(_nomPersonne))
+{
+	<h2>Le nom est @_nomPersonne</h2>
+}
+
+

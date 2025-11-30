@@ -1,0 +1,29 @@
+﻿@page "/formulaire"
+@rendermode RenderMode.InteractiveServer
+
+
+@* sans render mode interactive le message ne s'affiche pas après submit' *@
+@* ne pas faire car pas securisé *@
+@* @attribute [RequireAntiforgeryToken(required:false)] *@ 
+
+<h3>Formulaire</h3>
+<div style="height:100vh">
+	&nbsp;
+</div>
+
+@* data-enhance : ameliore le comportement du formulaire *@
+
+<form method="post" @formname="personne_infos" @onsubmit="OnSubmit" data-enhance> 
+	<AntiforgeryToken />
+	<input type="text" placeholder="Nom" @bind-value="Model.Nom"/>
+	<button type="submit">Envoyer</button>
+
+</form>
+
+
+@if(!string.IsNullOrEmpty(_nomPersonne))
+{
+	<h2>Le nom est @_nomPersonne</h2>
+}
+
+
