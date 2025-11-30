@@ -25,14 +25,51 @@ ou
 ValidationMessage For -> pour afficher les erreurs d'un champ spécifique
 
 *@
+@if(!string.IsNullOrEmpty(Model.Nom))
+{
+	<h2>Je m'appelle @Model.Nom</h2>
+}
+
 
 <EditForm FormName="personne_infos" OnValidSubmit="OnSubmit" Model="Model">
 	<Blazored.FluentValidation.FluentValidationValidator DisableAssemblyScanning ="true"/>
 	@* <DataAnnotationsValidator />  *@
 	@* <ValidationSummary /> *@
-	@* <input type="text" placeholder="Nom" @bind-value="Model.Nom" /> *@
-	<InputText @bind-Value="Model.Nom" placeholder="Nom" />
+	<input type="text" placeholder="Nom" @bind-value="Model.Nom" 
+	@bind-value:event="oninput"/>
+	@* <InputText @bind-Value="Model.Nom" placeholder="Nom" /> *@
 	<ValidationMessage For="() => Model.Nom"/>
+	<br />
+	Bio : <InputTextArea @bind-Value="Model.Bio" row="5"/>
+	<br/>
+	Age : <InputNumber @bind-Value="Model.Age" step="1" min="0" max="120"/>
+	<br/>
+	VIP : <InputCheckbox @bind-Value="Model.VIP" />
+	<br />
+	Sexe : 
+	<InputRadioGroup @bind-Value=Model.Sexe>
+		<InputRadio Value="Sexe.Feminin"></InputRadio> Femme
+		<InputRadio Value="Sexe.Masculin"></InputRadio> Homme
+
+	<br/>
+		Date Naissane : <InputDate @bind-Value="Model.DateNaissance" />
+	<br/>
+		Pays : <InputSelect @bind-Value="Model.Pays">
+			<option value=""></option>
+			<option value="France">France</option>
+			<option value="Espagne">Espagne</option>
+			<option value="Angleterre">Angleterre</option>
+			<option value="Allemagne">Allemagne</option>
+			<option value="Corée du Sud">Corée du Sud</option>
+			<option value="Italie">Italie</option>
+			<option value="Autres">Autres</option>
+
+
+		</InputSelect>
+
+
+	</InputRadioGroup>
+
 	<button type="submit">Envoyer</button>
 
 </EditForm>
