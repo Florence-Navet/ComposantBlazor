@@ -11,7 +11,9 @@ public partial class Formulaire
     public Personne? Model { get; set; }
 
     private string? _nomPersonne;
-    //private bool _error; pouir gestion d'erreur simple    
+    //private bool _error; pour gestion d'erreur simple
+    
+    private string? _imageBase64;
 
     protected override void OnInitialized()
     {
@@ -32,5 +34,20 @@ public partial class Formulaire
 
         //}
         _nomPersonne = Model?.Nom;
+    }
+
+    //des que la personne choisit un fichier
+    private async Task OnFileChosen(InputFileChangeEventArgs args)
+    {
+        //copier et recuperer dans un stream memoire
+        using(var Stream = args.File.OpenReadStream())
+        {
+            using(var memSteam = new MemoryStream())
+            {
+                await Stream.CopyToAsync(memSteam); 
+                memSteam.Position = 0;
+                _imageBase64 = Convert.ToBase64String(memSteam.ToArray());
+            }
+        }
     }
 }

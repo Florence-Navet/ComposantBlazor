@@ -66,9 +66,20 @@ ValidationMessage For -> pour afficher les erreurs d'un champ spécifique
 
 
 		</InputSelect>
+		<br />
+		Photo : <InputFile accept="image/*" OnChange="OnFileChosen" />
+		<br />
+		@if(!string.IsNullOrEmpty(_imageBase64))
+		{
+		<img width="100" src="data:image/png;base64, @_imageBase64" />
+		}
+
+		
 
 
 	</InputRadioGroup>
+	
+
 
 	<button type="submit">Envoyer</button>
 
